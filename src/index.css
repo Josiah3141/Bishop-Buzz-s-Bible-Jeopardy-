@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", "Georgia", serif;
+  --color-jeopardy-blue: #060ce9;
+  --color-jeopardy-gold: #ffcc00;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+body {
+  background-color: var(--color-jeopardy-blue);
+  color: white;
+  font-family: var(--font-serif);
+  overflow-x: hidden;
+}
+
+.jeopardy-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 8px;
+  padding: 16px;
+}
+
+.jeopardy-card {
+  aspect-ratio: 4/3;
+  background-color: var(--color-jeopardy-blue);
+  border: 2px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  perspective: 1000px;
+}
+
+.jeopardy-card:hover:not(.used) {
+  transform: scale(1.05);
+  z-index: 10;
+  box-shadow: 0 0 20px rgba(255, 204, 0, 0.5);
+}
+
+.jeopardy-card.used {
+  cursor: default;
+  opacity: 0.5;
+}
+
+.jeopardy-text-gold {
+  color: var(--color-jeopardy-gold);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+}
+
+@keyframes flip {
+  0% { transform: rotateY(0); }
+  100% { transform: rotateY(180deg); }
+}
+
+.daily-double-flash {
+  animation: flash 0.5s infinite alternate;
+}
+
+@keyframes flash {
+  from { color: white; }
+  to { color: var(--color-jeopardy-gold); }
+}
